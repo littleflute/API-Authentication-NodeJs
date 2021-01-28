@@ -11,10 +11,12 @@ const client = require('../helpers/init_redis')
 module.exports = {
   register: async (req, res, next) => {
     try {
+      console.log("xd------------" + req.body.email)
       // const { email, password } = req.body
       // if (!email || !password) throw createError.BadRequest()
       const result = await authSchema.validateAsync(req.body)
 
+      console.log("xd------------" + JSON.stringify(result));
       const doesExist = await User.findOne({ email: result.email })
       if (doesExist)
         throw createError.Conflict(`${result.email} is already been registered`)
