@@ -17,14 +17,13 @@ module.exports = {
       const result = await authSchema.validateAsync(req.body)
 
       console.log("xd------------" + JSON.stringify(result));
-      const doesExist = await User.findOne({ email: result.email })
-      if (doesExist)
-        throw createError.Conflict(`${result.email} is already been registered`)
-
-      const user = new User(result)
-      const savedUser = await user.save()
+      var savedUser = {};
+      savedUser.id = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"; 
+      
       const accessToken = await signAccessToken(savedUser.id)
       const refreshToken = await signRefreshToken(savedUser.id)
+      
+      console.log("xd------------ accessToken=" + accessToken);
 
       res.send({ accessToken, refreshToken })
     } catch (error) {

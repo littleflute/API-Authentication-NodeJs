@@ -48,14 +48,14 @@ module.exports = {
       }
       JWT.sign(payload, secret, options, (err, token) => {
         if (err) {
-          console.log(err.message)
+          console.log("xd::1 " +err.message)
           // reject(err)
           reject(createError.InternalServerError())
         }
 
         client.SET(userId, token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
           if (err) {
-            console.log(err.message)
+            console.log("xd::2  " + err.message)
             reject(createError.InternalServerError())
             return
           }
